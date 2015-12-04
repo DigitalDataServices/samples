@@ -1,0 +1,353 @@
+﻿<Activity mc:Ignorable="sads sap sap2010" x:Class="ActivityBuilder" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:eac="clr-namespace:ESRI.ArcGIS.Client;assembly=ESRI.ArcGIS.Client"
+ xmlns:eacg="clr-namespace:ESRI.ArcGIS.Client.Geometry;assembly=ESRI.ArcGIS.Client"
+ xmlns:eact="clr-namespace:ESRI.ArcGIS.Client.Tasks;assembly=ESRI.ArcGIS.Client"
+ xmlns:esri="http://schemas.esri.com/arcgis/client/2009"
+ xmlns:gce="clr-namespace:Geocortex.Core.Extensions;assembly=Geocortex.Core"
+ xmlns:gcx="http://apis.geocortex.com/2009"
+ xmlns:gfc="clr-namespace:Geocortex.Forms.Client;assembly=Geocortex.EssentialsWpfApi"
+ xmlns:gfci="clr-namespace:Geocortex.Forms.Client.Items;assembly=Geocortex.EssentialsWpfApi"
+ xmlns:gr="clr-namespace:Geocortex.Reporting;assembly=Geocortex.Reporting"
+ xmlns:gwa="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow"
+ xmlns:gwa1="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=System.Core"
+ xmlns:s1="clr-namespace:System;assembly=System"
+ xmlns:s2="clr-namespace:System;assembly=mscorlib"
+ xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sl="clr-namespace:System.Linq;assembly=System.Core"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>ESRI.ArcGIS.Client</x:String>
+      <x:String>ESRI.ArcGIS.Client.Geometry</x:String>
+      <x:String>ESRI.ArcGIS.Client.Tasks</x:String>
+      <x:String>Geocortex.Core.Extensions</x:String>
+      <x:String>Geocortex.Workflow.Activities</x:String>
+      <x:String>Geocortex.Forms.Client</x:String>
+      <x:String>Geocortex.Forms.Client.Items</x:String>
+      <x:String>Geocortex.Reporting</x:String>
+      <x:String>System</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Windows</x:String>
+      <x:String>System.Windows.Threading</x:String>
+      <x:String>ESRI.ArcGIS.Client.Symbols</x:String>
+      <x:String>System.Windows.Media</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>ESRI.ArcGIS.Client</AssemblyReference>
+      <AssemblyReference>Geocortex.Core</AssemblyReference>
+      <AssemblyReference>Geocortex.Workflow</AssemblyReference>
+      <AssemblyReference>Geocortex.EssentialsWpfApi</AssemblyReference>
+      <AssemblyReference>Geocortex.Reporting</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Reactive.Core</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="UploadSequence" sap2010:WorkflowViewState.IdRef="Sequence_2" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:IList(gcx:FileItem)" Name="usrFiles" />
+      <Variable x:TypeArguments="s2:Byte[]" Name="shpByte" />
+      <Variable x:TypeArguments="s2:Byte[]" Name="dbfByte" />
+      <Variable x:TypeArguments="s2:Byte[]" Name="prjByte" />
+      <Variable x:TypeArguments="esri:FeatureSet" Name="usrFeatureSet" />
+      <Variable x:TypeArguments="x:String" Default="ImportShapefile" Name="wfContainer" />
+      <Variable x:TypeArguments="x:String" Name="usrButton" />
+      <Variable x:TypeArguments="x:String" Name="shpName" />
+    </Sequence.Variables>
+    <gwa1:ConfigureWorkflowContainer sap2010:WorkflowViewState.IdRef="ConfigureWorkflowContainer_1" IsBusy="[True]" ShowContainer="[False]" Title="Processing Shapefile" WorkflowContainerName="[wfContainer]" />
+    <gwa1:DisplayForm ButtonResultValue="[usrButton]" FormDefinition="&lt;FormDefinition xmlns=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;ContainerFormItem xmlns:a=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;Group1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:Description/&gt;&lt;a:FormItems&gt;&lt;a:FormItem i:type=&quot;a:FilePickerFormItem&quot;&gt;&lt;a:ArgumentName&gt;shpFile&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;FilePicker1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;&gt;&lt;b:ValidationItem i:type=&quot;b:FileSizeValidationItem&quot;&gt;&lt;b:Message&gt;10MB total file size limit exceeded&lt;/b:Message&gt;&lt;b:TotalFileSize&gt;10485760&lt;/b:TotalFileSize&gt;&lt;/b:ValidationItem&gt;&lt;/a:ValidationItems&gt;&lt;a:AcceptFileTypes&gt;.shp,.shx,.dbf,.prj&lt;/a:AcceptFileTypes&gt;&lt;a:AllowMultiple&gt;true&lt;/a:AllowMultiple&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID/&gt;&lt;a:Text&gt;Select Shapefile&lt;/a:Text&gt;&lt;/a:Label&gt;&lt;/a:FormItem&gt;&lt;/a:FormItems&gt;&lt;a:MaxWidth&gt;INF&lt;/a:MaxWidth&gt;&lt;a:Orientation&gt;Vertical&lt;/a:Orientation&gt;&lt;/ContainerFormItem&gt;&lt;KnownTypes xmlns:a=&quot;http://schemas.microsoft.com/2003/10/Serialization/Arrays&quot;&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.ContainerFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.FilePickerFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.Validation.FileSizeValidationItem&lt;/a:string&gt;&lt;/KnownTypes&gt;&lt;MaxHeight&gt;800&lt;/MaxHeight&gt;&lt;MaxWidth&gt;1000&lt;/MaxWidth&gt;&lt;Title&gt;Select Shapefile...&lt;/Title&gt;&lt;Version&gt;1.1&lt;/Version&gt;&lt;/FormDefinition&gt;" sap2010:WorkflowViewState.IdRef="DisplayForm_1" WorkflowContainerName="[wfContainer]">
+      <gwa1:DisplayForm.Body>
+        <ActivityAction x:TypeArguments="gcx:FormDefinition">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="gcx:FormDefinition" Name="form" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="RuntimeModifications" sap2010:WorkflowViewState.IdRef="Sequence_1" />
+        </ActivityAction>
+      </gwa1:DisplayForm.Body>
+      <gwa1:DisplayForm.Buttons>
+        <gcx:FormButton CausesValidation="False" IsDefault="False" Label="Cancel" Value="Cancel" />
+        <gcx:FormButton CausesValidation="True" IsDefault="True" Label="Upload" Value="Upload" />
+      </gwa1:DisplayForm.Buttons>
+      <gwa1:DisplayForm.FormOutArguments>
+        <gwa:ArgumentWrapper x:TypeArguments="OutArgument" IsRequired="False" Name="shpFile">
+          <gwa:ArgumentWrapper.Argument>
+            <OutArgument x:TypeArguments="scg:IList(gcx:FileItem)">[usrFiles]</OutArgument>
+          </gwa:ArgumentWrapper.Argument>
+        </gwa:ArgumentWrapper>
+      </gwa1:DisplayForm.FormOutArguments>
+    </gwa1:DisplayForm>
+    <gwa1:ConfigureWorkflowContainer sap2010:WorkflowViewState.IdRef="ConfigureWorkflowContainer_2" IsBusy="[True]" ShowContainer="[True]" Title="Processing Shapefile..." WorkflowContainerName="[wfContainer]" />
+    <If Condition="[usrButton = &quot;Upload&quot;]" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Sequence" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:Boolean" Default="False" Name="dbfFound" />
+            <Variable x:TypeArguments="x:Boolean" Default="False" Name="shpFound" />
+            <Variable x:TypeArguments="x:Boolean" Default="False" Name="prjFound" />
+          </Sequence.Variables>
+          <ForEach x:TypeArguments="gcx:FileItem" DisplayName="ForEach&lt;FileItem&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[usrFiles]">
+            <ActivityAction x:TypeArguments="gcx:FileItem">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="gcx:FileItem" Name="fileItem" />
+              </ActivityAction.Argument>
+              <Switch x:TypeArguments="x:String" Expression="[fileItem.FileName.SubString(fileItem.FileName.Length - 3).ToUpper()]" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+                <Sequence x:Key="DBF" DisplayName="DBFSequence" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <Assign DisplayName="AssignDBFFound" sap2010:WorkflowViewState.IdRef="Assign_9">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[dbfFound]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="AssignDBFBytes" sap2010:WorkflowViewState.IdRef="Assign_5">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s2:Byte[]">[dbfByte]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s2:Byte[]">[fileItem.FileData]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+                <Sequence x:Key="PRJ" DisplayName="PRJSequence" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <Assign DisplayName="AssignPRJFound" sap2010:WorkflowViewState.IdRef="Assign_10">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[prjFound]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="AssignPRJBytes" sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s2:Byte[]">[prjByte]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s2:Byte[]">[fileItem.FileData]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+                <Sequence x:Key="SHP" DisplayName="SHPSequence" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_11">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Boolean">[shpFound]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="AssignSHPBytes" sap2010:WorkflowViewState.IdRef="Assign_7">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s2:Byte[]">[shpByte]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s2:Byte[]">[fileItem.FileData]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign DisplayName="AssignSHPName" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[shpName]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[fileItem.FileName]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </Switch>
+            </ActivityAction>
+          </ForEach>
+          <If Condition="[dbfFound and prjFound and shpFound]" DisplayName="IfAllFilesFound" sap2010:WorkflowViewState.IdRef="If_2">
+            <If.Then>
+              <Sequence DisplayName="LoadSHPSequence" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:String" Name="usr" />
+                  <Variable x:TypeArguments="esri:Envelope" Name="usrExtent" />
+                  <Variable x:TypeArguments="esri:SpatialReference" Default="[New ESRI.ArcGIS.Client.Geometry.SpatialReference(102653)]" Name="srGilpinCounty" />
+                  <Variable x:TypeArguments="x:String" Default="https://data.digitaldataservices.com/arcgis/rest/services/Utilities/Geometry/GeometryServer" Name="urlGeometryServices" />
+                  <Variable x:TypeArguments="scg:IList(esri:Graphic)" Name="projectedShapefile" />
+                </Sequence.Variables>
+                <gwa1:ShapefileToFeatureSet DbfFile="[dbfByte]" FeatureSet="[usrFeatureSet]" sap2010:WorkflowViewState.IdRef="ShapefileToFeatureSet_1" PrjFile="[prjByte]" ShpFile="[shpByte]" />
+                <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                  <TryCatch.Try>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_12">
+                      <gwa1:ProjectTask FeatureSet="[usrFeatureSet]" GeometryServiceUrl="[urlGeometryServices]" sap2010:WorkflowViewState.IdRef="ProjectTask_2" Results="[projectedShapefile]" SpatialReference="[srGilpinCounty]" />
+                      <Assign sap2010:WorkflowViewState.IdRef="Assign_13">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="esri:FeatureSet">[usrFeatureSet]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="esri:FeatureSet">[new FeatureSet(projectedShapefile)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </TryCatch.Try>
+                  <TryCatch.Catches>
+                    <Catch x:TypeArguments="s2:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                      <ActivityAction x:TypeArguments="s2:Exception">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="s2:Exception" Name="exception" />
+                        </ActivityAction.Argument>
+                      </ActivityAction>
+                    </Catch>
+                  </TryCatch.Catches>
+                </TryCatch>
+                <gwa1:GetFeatureSetExtent FeatureSet="[usrFeatureSet]" sap2010:WorkflowViewState.IdRef="GetFeatureSetExtent_1" Result="[usrExtent]" />
+                <gwa1:SetMapExtent Extent="[usrExtent.Expand(1.2)]" sap2010:WorkflowViewState.IdRef="SetMapExtent_2" />
+                <gwa1:UpdateGraphicsLayer GraphicsLayerId="Shapefile" sap2010:WorkflowViewState.IdRef="UpdateGraphicsLayer_2" RemoveAllFeatures="True" />
+                <gwa1:UpdateGraphicsLayer FeatureSet="[usrFeatureSet]" GraphicsLayerId="Shapefile" sap2010:WorkflowViewState.IdRef="UpdateGraphicsLayer_1" RemoveAllFeatures="True" Renderer="[New ESRI.ArcGIS.Client.SimpleRenderer() With { .Symbol = new ESRI.ArcGIS.Client.Symbols.SimpleLineSymbol(System.Windows.Media.Colors.Cyan, 2.0) With { .Style = ESRI.ArcGIS.Client.Symbols.SimpleLineSymbol.LineStyle.Solid } }]" />
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <gwa1:Alert sap2010:WorkflowViewState.IdRef="Alert_4" Text="You must supply the a .SHP, .DBF, and .PRJ file. Please try again." Title="Shapefile Error" />
+            </If.Else>
+          </If>
+          <gwa1:ExitWorkflow sap2010:WorkflowViewState.IdRef="ExitWorkflow_2" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <gwa1:ExitWorkflow sap2010:WorkflowViewState.IdRef="ExitWorkflow_1" />
+      </If.Else>
+    </If>
+    <sads:DebugSymbol.Symbol>d4kBQzpcUHJvZ3JhbSBGaWxlcyAoeDg2KVxMYXRpdHVkZSBHZW9ncmFwaGljc1xHZW9jb3J0ZXggRXNzZW50aWFsc1xEZWZhdWx0XFJFU1QgRWxlbWVudHNcU2l0ZXNcR2lscGluQ291bnR5XFdvcmtmbG93c1xTaGFwZWZpbGVNYW5hZ2VyLnhhbWxaSwPxAQ4CAQFSNFJFAgECVgVW0gECAWtXBWsYAgFjbAVs1AECAV1tBe8BCgIBA1ZsVnQCAXBWwAFWzwECAW5WgwFWjAECAW1WkwFWqQECAWxXRlfJEgIBaleQE1efEwIBaFcpVzYCAWZnRGdOAgFlXQtdZwIBZGxsbHQCAWJswgFs0QECAWBsgwFsiwECAV9skgFsqwECAV5tE201AgEEbwnqARQCAQftAQntAU8CAQZxO3FCAgEKcjtyQgIBCXM7c0ICAQh1C7sBFQIBOrwBC+gBEAIBDOkBC+kBUQIBC3WOAXWaAQIBXHoPuQEYAgE7vAEZvAE/AgENvgEP4wEaAgEU5gEP5gGpAQIBEXo9eoQBAgE8exGMARwCAVONARGeARwCAUqfARG4ARwCAT3CAU3CAYkBAgEWwwFAwwGdAQIBFcYBEcYBwgECATLHARHeARwCASbfARHfAZcBAgEi4AER4AF4AgEf4QER4QGaAQIBHOIBEeIBpAMCARfmAUrmAY4BAgET5gGVAeYBpgECARJ8E4MBHAIBWIQBE4sBHAIBVI4BE5UBHAIBT5YBE50BHAIBS6ABE6cBHAIBRqgBE68BHAIBQrABE7cBHAIBPsYBoAHGAasBAgE4xgE1xgFAAgE2xgG0AcYBvwECATTGAUzGAV0CATPJARXTASACASffAYcB3wGUAQIBJN8BNt8BRwIBI+ABK+ABRAIBIOEBO+EBRgIBHuEBkQHhAZcBAgEd4gFY4gFjAgEb4gE24gFHAgEa4gGuAeIBtAECARniAb4B4gGhAwIBGIEBP4EBQwIBW35AfkoCAVmJAT+JAVICAVeGAUCGAUkCAVWTAT+TAUMCAVKQAUCQAUoCAVCbAT+bAVICAU6YAUCYAUkCAUylAT+lAUMCAUmiAUCiAUoCAUetAT+tAVICAUWqAUCqAUkCAUO1AT61AVECAUGyAT+yAUgCAT/KARfKAeYBAgErywEX0gEgAgEoygFZygFwAgEwygGpAcoBvwECAS/KAdEBygHjAQIBLcoBNMoBRQIBLNABSdABbQIBKs0BSs0BWQIBKQ==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="ConfigureWorkflowContainer_1" sap:VirtualizedContainerService.HintSize="924,186" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="924,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ConfigureWorkflowContainer_2" sap:VirtualizedContainerService.HintSize="924,186" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="264,384">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Switch`1_2" sap:VirtualizedContainerService.HintSize="476,288" />
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="677,436" />
+      <sap2010:ViewStateData Id="ShapefileToFeatureSet_1" sap:VirtualizedContainerService.HintSize="418,136" />
+      <sap2010:ViewStateData Id="ProjectTask_2" sap:VirtualizedContainerService.HintSize="334,161" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="334,60" />
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="356,385">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="418,287">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GetFeatureSetExtent_1" sap:VirtualizedContainerService.HintSize="418,86" />
+      <sap2010:ViewStateData Id="SetMapExtent_2" sap:VirtualizedContainerService.HintSize="418,61" />
+      <sap2010:ViewStateData Id="UpdateGraphicsLayer_2" sap:VirtualizedContainerService.HintSize="418,136" />
+      <sap2010:ViewStateData Id="UpdateGraphicsLayer_1" sap:VirtualizedContainerService.HintSize="418,136" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="440,1166">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Alert_4" sap:VirtualizedContainerService.HintSize="212,86" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="677,1314" />
+      <sap2010:ViewStateData Id="ExitWorkflow_2" sap:VirtualizedContainerService.HintSize="677,22" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="699,1976">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExitWorkflow_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="924,2124" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="946,2791">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="986,2911" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
