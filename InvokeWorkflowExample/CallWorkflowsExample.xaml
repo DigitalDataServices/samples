@@ -67,16 +67,15 @@
   <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="usrInput" />
-      <Variable x:TypeArguments="x:String" Default="C:\Users\tmneer.SERVER05\Desktop\ToUpper.xaml" Name="uriWorkflow" />
       <Variable x:TypeArguments="scg:IDictionary(x:String, x:Object)" Name="wfDictionary" />
       <Variable x:TypeArguments="scg:IDictionary(x:String, x:Object)" Name="wfOutput" />
     </Sequence.Variables>
     <gwa1:Prompt sap2010:Annotation.AnnotationText="Prompt user for some text to convert to all uppercase" DefaultText="example text" Description="Enter lower case text to be converted to upper case text." sap2010:WorkflowViewState.IdRef="Prompt_1" Result="[usrInput]" Title="Enter Text" />
     <gwa1:CreateDictionary x:TypeArguments="x:String, x:Object" sap2010:Annotation.AnnotationText="Creates a dictionary to pass in the input parameters to the invokved workflow" sap2010:WorkflowViewState.IdRef="CreateDictionary`2_1" Result="[wfDictionary]" />
     <gwa1:AddToDictionary x:TypeArguments="x:String, x:Object" sap2010:Annotation.AnnotationText="Add the dictionary pair to the dictionary." Dictionary="[wfDictionary]" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_1" Key="input" Value="[usrInput]" />
-    <gwa1:InvokeWorkflow sap2010:Annotation.AnnotationText="Call the workflow and pass in the input parameters. Capture the output parameters." sap2010:WorkflowViewState.IdRef="InvokeWorkflow_1" Inputs="[wfDictionary]" Outputs="[wfOutput]" WorkflowXamlUri="[uriWorkflow]" />
+    <gwa1:InvokeWorkflow sap2010:Annotation.AnnotationText="Call the workflow and pass in the input parameters. Capture the output parameters." sap2010:WorkflowViewState.IdRef="InvokeWorkflow_1" Inputs="[wfDictionary]" Outputs="[wfOutput]" WorkflowXamlUri="INSERT PATH TO ToUpper.xaml file" />
     <gwa1:Alert sap2010:WorkflowViewState.IdRef="Alert_1" Text="[&quot;Text In: &quot; + usrInput + Environment.NewLine + &quot;Text Out: &quot; + wfOutput(&quot;output&quot;).ToString()]" Title="Results" />
-    <sads:DebugSymbol.Symbol>dzpDOlxVc2Vyc1x0bW5lZXIuU0VSVkVSMDVcRGVza3RvcFxDYWxsV29ya2Zsb3dzRXhhbXBsZS54YW1sFEMDUA4CAQFGNEZjAgECSgVKowICARZLBUuEAgIBE0wFTIICAgENTQVNkwICAQZOBU7QAQIBA0qTAUrOAQIBG0qBAkqNAgIBGUqUAkqgAgIBGEp4SoYBAgEXS/EBS4ECAgEUTPMBTP8BAgERTJoBTKoBAgEPTOUBTOwBAgEOTYECTZACAgELTcsBTdsBAgEJTeQBTfABAgEHTkBOvQECAQVOxAFOzQECAQQ=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzpDOlxVc2Vyc1x0bW5lZXIuU0VSVkVSMDVcRGVza3RvcFxDYWxsV29ya2Zsb3dzRXhhbXBsZS54YW1sE0MDTw4CAQFJBUmjAgIBFEoFSoQCAgERSwVLggICAQtMBUymAgIBBU0FTdABAgECSZMBSc4BAgEZSYECSY0CAgEXSZQCSaACAgEWSXhJhgECARVK8QFKgQICARJL8wFL/wECAQ9LmgFLqgECAQ1L5QFL7AECAQxMgQJMowICAQpMywFM2wECAQhM5AFM8AECAQZNQE29AQIBBE3EAU3NAQIBAw==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>

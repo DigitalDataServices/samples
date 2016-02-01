@@ -1,31 +1,21 @@
-# Project Name
+# Invoke Workflow Example
 
-TODO: Write a project description
+Demonstrates how to pass a variable from one Geocortex Workflow to another and receive a result.
+
+This example illustrates how to request a string from a user. Pass that string to another workflow using the `Invoke Workflow` module where the string is converted to uppercase and returned. The result is then displayed to the user.
 
 ## Installation
 
-TODO: Describe the installation process
-
-## Usage
-
-TODO: Write usage instructions
-
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+Copy both the `CallWorkflowsExample.xaml` and `ToUpper.xaml` to a location where you can open them with Geocortex Workflow Designer. You **must** set the `Workflow Xaml Uri` path to the absolute path of the `ToUpper.xaml`. Sorry still haven't figured out a workaround to use relative pathing in WPF. 
 
 ## History
 
-TODO: Write history
+2016-02-01 - Initial upload
 
 ## Credits
 
-TODO: Write credits
+Copyright &copy; 2016 [Digital Data Services, Inc.](http://www.digitaldataservices.com/geocortex)
 
 ## License
 
-TODO: Write license
+No License. You are free to use this code however you wish.
