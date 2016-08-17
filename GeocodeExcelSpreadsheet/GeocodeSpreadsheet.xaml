@@ -1,0 +1,1155 @@
+﻿<Activity mc:Ignorable="sads sap sap2010" x:Class="ActivityBuilder"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:eac="clr-namespace:ESRI.ArcGIS.Client;assembly=ESRI.ArcGIS.Client"
+ xmlns:eacg="clr-namespace:ESRI.ArcGIS.Client.Geometry;assembly=ESRI.ArcGIS.Client"
+ xmlns:eact="clr-namespace:ESRI.ArcGIS.Client.Tasks;assembly=ESRI.ArcGIS.Client"
+ xmlns:esri="http://schemas.esri.com/arcgis/client/2009"
+ xmlns:gce="clr-namespace:Geocortex.Core.Extensions;assembly=Geocortex.Core"
+ xmlns:gcx="http://apis.geocortex.com/2009"
+ xmlns:gfc="clr-namespace:Geocortex.Forms.Client;assembly=Geocortex.EssentialsWpfApi"
+ xmlns:gfci="clr-namespace:Geocortex.Forms.Client.Items;assembly=Geocortex.EssentialsWpfApi"
+ xmlns:gr="clr-namespace:Geocortex.Reporting;assembly=Geocortex.Reporting"
+ xmlns:gwa="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow"
+ xmlns:gwa1="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:nj="clr-namespace:Newtonsoft.Json;assembly=Newtonsoft.Json"
+ xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json"
+ xmlns:s="clr-namespace:System;assembly=System.Core"
+ xmlns:s1="clr-namespace:System;assembly=System"
+ xmlns:s2="clr-namespace:System;assembly=mscorlib"
+ xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:si="clr-namespace:System.IO;assembly=mscorlib"
+ xmlns:sl="clr-namespace:System.Linq;assembly=System.Core"
+ xmlns:snm="clr-namespace:System.Net.Mail;assembly=System"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="bing_api_key" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>ESRI.ArcGIS.Client</x:String>
+      <x:String>ESRI.ArcGIS.Client.Geometry</x:String>
+      <x:String>ESRI.ArcGIS.Client.Tasks</x:String>
+      <x:String>Geocortex.Core.Extensions</x:String>
+      <x:String>Geocortex.Workflow.Activities</x:String>
+      <x:String>Geocortex.Forms.Client</x:String>
+      <x:String>Geocortex.Forms.Client.Items</x:String>
+      <x:String>Geocortex.Reporting</x:String>
+      <x:String>System</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Windows</x:String>
+      <x:String>System.Windows.Threading</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Net.Mail</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>ESRI.ArcGIS.Client</AssemblyReference>
+      <AssemblyReference>Geocortex.Core</AssemblyReference>
+      <AssemblyReference>Geocortex.Workflow</AssemblyReference>
+      <AssemblyReference>Geocortex.EssentialsWpfApi</AssemblyReference>
+      <AssemblyReference>Geocortex.Reporting</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Reactive.Core</AssemblyReference>
+      <AssemblyReference>System.Windows.Presentation</AssemblyReference>
+      <AssemblyReference>Geocortex.Workflow.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Geocode Spreadsheet" sap2010:WorkflowViewState.IdRef="Sequence_1" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="Batch_Geocode" Name="wfContainer" />
+      <Variable x:TypeArguments="esri:SpatialReference" Default="[New ESRI.ArcGIS.Client.Geometry.SpatialReference(102100)]" Name="srWebMercator" />
+      <Variable x:TypeArguments="x:String" Name="usrButtonResult" />
+      <Variable x:TypeArguments="scg:IList(gcx:FileItem)" Name="ilistUserSpreadsheet" />
+      <Variable x:TypeArguments="sd:DataSet" Name="dsSpreadsheet" />
+      <Variable x:TypeArguments="x:String" Default="https://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US" Name="strGeocoderRoot" />
+      <Variable x:TypeArguments="x:String" Default="&amp;key=" Name="strGeocoderKey" />
+      <Variable x:TypeArguments="esri:FeatureSet" Name="fsGeocodeResults" />
+      <Variable x:TypeArguments="esri:Envelope" Name="envGeocodeResults" />
+      <Variable x:TypeArguments="x:String" Name="strUrl" />
+    </Sequence.Variables>
+    <gwa1:ConfigureWorkflowContainer sap2010:WorkflowViewState.IdRef="ConfigureWorkflowContainer_1" IsBusy="[True]" Message="Please wait..." ShowContainer="[True]" Title="Geocode Excel Spreadsheet" WorkflowContainerName="[wfContainer]" />
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_67">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[strGeocoderKey]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[strGeocoderKey + bing_api_key]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[strGeocoderKey = &quot;&amp;key=&quot;]">
+      <If.Then>
+        <Sequence>
+          <gwa1:Alert Text="You must assign a BING API Key to this workflow in the Geocortex Manager to use it." Title="Configuration Error" sap2010:WorkflowViewState.IdRef="Alert_4" />
+          <gwa1:ExitWorkflow sap2010:WorkflowViewState.IdRef="ExitWorkflow_4" />
+          <sap2010:WorkflowViewState.IdRef>Sequence_42</sap2010:WorkflowViewState.IdRef>
+        </Sequence>
+      </If.Then>
+      <sap2010:WorkflowViewState.IdRef>If_6</sap2010:WorkflowViewState.IdRef>
+    </If>
+    <Sequence DisplayName="GetSpreadsheet" sap2010:WorkflowViewState.IdRef="Sequence_15">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="filetype" />
+      </Sequence.Variables>
+      <gwa1:DisplayForm ButtonResultValue="[usrButtonResult]" DisplayName="UploadSpreadsheet" FormDefinition="&lt;FormDefinition xmlns=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;ContainerFormItem xmlns:a=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;Group1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:Description/&gt;&lt;a:FormItems&gt;&lt;a:FormItem i:type=&quot;a:MarkdownFormItem&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;Markdown1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:PlainText&gt;Please upload an Microsoft Excel spreadsheet (.xlsx) file of addresses to geocode.&amp;#xD;&#xA;&amp;#xD;&#xA;**Important**&amp;#xD;&#xA;&amp;#xD;&#xA;  * The first line of the table will be treated as column headers.&amp;#xD;&#xA;  * There must be address, city, state, and zip columns in the file.&amp;#xD;&#xA;  * File may not exceed 10 megabytes in size.&lt;/a:PlainText&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:FilePickerFormItem&quot;&gt;&lt;a:ArgumentName&gt;fileXls&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;FilePicker1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;&gt;&lt;b:ValidationItem i:type=&quot;b:FileSizeValidationItem&quot;&gt;&lt;b:Message&gt;10MB total file size limit exceeded&lt;/b:Message&gt;&lt;b:TotalFileSize&gt;10485760&lt;/b:TotalFileSize&gt;&lt;/b:ValidationItem&gt;&lt;b:ValidationItem i:type=&quot;b:RequiredValidationItem&quot;&gt;&lt;b:Message&gt;You must upload a file&lt;/b:Message&gt;&lt;/b:ValidationItem&gt;&lt;/a:ValidationItems&gt;&lt;a:AcceptFileTypes&gt;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&lt;/a:AcceptFileTypes&gt;&lt;a:AllowMultiple&gt;false&lt;/a:AllowMultiple&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID/&gt;&lt;a:Text&gt;Excel File: &lt;/a:Text&gt;&lt;/a:Label&gt;&lt;/a:FormItem&gt;&lt;/a:FormItems&gt;&lt;a:MaxWidth&gt;INF&lt;/a:MaxWidth&gt;&lt;a:Orientation&gt;Vertical&lt;/a:Orientation&gt;&lt;a:VisibleControlID i:nil=&quot;true&quot;/&gt;&lt;a:VisibleControlValue i:nil=&quot;true&quot;/&gt;&lt;/ContainerFormItem&gt;&lt;KnownTypes xmlns:a=&quot;http://schemas.microsoft.com/2003/10/Serialization/Arrays&quot;&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.ContainerFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.MarkdownFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.FilePickerFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.Validation.FileSizeValidationItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.Validation.RequiredValidationItem&lt;/a:string&gt;&lt;/KnownTypes&gt;&lt;MaxHeight&gt;800&lt;/MaxHeight&gt;&lt;MaxWidth&gt;1000&lt;/MaxWidth&gt;&lt;Title&gt;Upload Data&lt;/Title&gt;&lt;Version&gt;1.1&lt;/Version&gt;&lt;/FormDefinition&gt;" sap2010:WorkflowViewState.IdRef="DisplayForm_1" WorkflowContainerName="[wfContainer]">
+        <gwa1:DisplayForm.Body>
+          <ActivityAction x:TypeArguments="gcx:FormDefinition">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="gcx:FormDefinition" Name="form" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="RuntimeModifications" sap2010:WorkflowViewState.IdRef="Sequence_2" />
+          </ActivityAction>
+        </gwa1:DisplayForm.Body>
+        <gwa1:DisplayForm.Buttons>
+          <gcx:FormButton CausesValidation="False" IsDefault="False" Label="Cancel" Value="Cancel" />
+          <gcx:FormButton CausesValidation="True" IsDefault="True" Label="Next" Value="Next" />
+        </gwa1:DisplayForm.Buttons>
+        <gwa1:DisplayForm.FormOutArguments>
+          <gwa:ArgumentWrapper x:TypeArguments="OutArgument" IsRequired="False" Name="fileXls">
+            <gwa:ArgumentWrapper.Argument>
+              <OutArgument x:TypeArguments="scg:IList(gcx:FileItem)">[ilistUserSpreadsheet]</OutArgument>
+            </gwa:ArgumentWrapper.Argument>
+          </gwa:ArgumentWrapper>
+        </gwa1:DisplayForm.FormOutArguments>
+      </gwa1:DisplayForm>
+      <If Condition="[usrButtonResult = &quot;Next&quot;]" DisplayName="CheckForUserExit" sap2010:WorkflowViewState.IdRef="If_3">
+        <If.Then>
+          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_34">
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_66">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[filetype]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Path.GetExtension(ilistUserSpreadsheet(0).FileName)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[filetype.ToUpper = &quot;.XLSX&quot;]" DisplayName="CheckIfFiletypeExists" sap2010:WorkflowViewState.IdRef="If_5">
+              <If.Then>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_33">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="strFileName" />
+                  </Sequence.Variables>
+                  <gwa1:XlsxToDataSet sap2010:WorkflowViewState.IdRef="XlsxToDataSet_3" Result="[dsSpreadsheet]" Source="[ilistUserSpreadsheet(0).FileData()]" />
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_45">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[strFileName]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[ilistUserSpreadsheet(0).FileName.Split(".".toCharArray)(0)+ "_Geocoded.xls"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_43">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="scg:IList(gcx:FileItem)">[ilistUserSpreadsheet]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="scg:IList(gcx:FileItem)">[Nothing]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_25">
+                  <gwa1:Alert sap2010:WorkflowViewState.IdRef="Alert_3" Text="[&quot;You must submit a file with the extension .xlsx for processing. You've uploaded a file type of &quot;+ filetype]" Title="Filetype error" />
+                  <gwa1:ExitWorkflow sap2010:WorkflowViewState.IdRef="ExitWorkflow_3" />
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <gwa1:ExitWorkflow sap2010:WorkflowViewState.IdRef="ExitWorkflow_2" />
+        </If.Else>
+      </If>
+    </Sequence>
+    <Sequence DisplayName="Get Coordinates" sap2010:WorkflowViewState.IdRef="Sequence_6">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Object" Name="oAddress" />
+        <Variable x:TypeArguments="x:Object" Name="oCity" />
+        <Variable x:TypeArguments="x:Object" Name="oState" />
+        <Variable x:TypeArguments="x:Object" Name="oZip" />
+        <Variable x:TypeArguments="s2:Byte[]" Name="baGeocodedPoint" />
+        <Variable x:TypeArguments="x:String" Name="strResponseJson" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dtInput" />
+        <Variable x:TypeArguments="x:Int32" Default="0" Name="i" />
+      </Sequence.Variables>
+      <Sequence DisplayName="GetAddressFields" sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="scg:IList(gcx:DataItem)" Name="ilistDiFields" />
+        </Sequence.Variables>
+        <gwa1:CreateList x:TypeArguments="gcx:DataItem" sap2010:WorkflowViewState.IdRef="CreateList`1_1" Result="[ilistDiFields]" />
+        <ForEach x:TypeArguments="sd:DataColumn" DisplayName="For each &lt;Field&gt; in table, add name to dilist" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[dsSpreadsheet.Tables(0).Columns().OfType(Of DataColumn)]">
+          <ActivityAction x:TypeArguments="sd:DataColumn">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="field" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Add field to list for user selection" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="gcx:DataItem" Name="diField" />
+              </Sequence.Variables>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="gcx:DataItem">[diField]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="gcx:DataItem">[New DataItem()]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[diField.Display]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[field.ColumnName]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Object">[diField.Value]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Object">[field.ColumnName]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <If Condition="[ilistDiFields.Contains(diField)]" sap2010:WorkflowViewState.IdRef="If_1">
+                <If.Else>
+                  <gwa1:InsertIntoList x:TypeArguments="gcx:DataItem" Index="{x:Null}" sap2010:WorkflowViewState.IdRef="InsertIntoList`1_2" Item="[diField]" List="[ilistDiFields]" />
+                </If.Else>
+              </If>
+            </Sequence>
+          </ActivityAction>
+        </ForEach>
+        <Sequence DisplayName="Add list item for no field" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="gcx:DataItem" Name="diField" />
+          </Sequence.Variables>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="gcx:DataItem">[diField]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="gcx:DataItem">[New DataItem()]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[diField.Display]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">No Field</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[diField.Value]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">["-"]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <gwa1:InsertIntoList x:TypeArguments="gcx:DataItem" Index="{x:Null}" sap2010:WorkflowViewState.IdRef="InsertIntoList`1_1" Item="[diField]" List="[ilistDiFields]" />
+        </Sequence>
+        <gwa1:DisplayForm ButtonResultValue="[usrButtonResult]" DisplayName="Get address columns" FormDefinition="&lt;FormDefinition xmlns=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;ContainerFormItem xmlns:a=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items&quot;&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;Group1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:Description&gt;Select the columns which contain the address values to geocode.&lt;/a:Description&gt;&lt;a:FormItems&gt;&lt;a:FormItem i:type=&quot;a:ComboBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;cbAddress&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;ComboBox1&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:DataItems/&gt;&lt;a:FilterByInputGeometry&gt;false&lt;/a:FilterByInputGeometry&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;ComboBox1&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Address: &lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:LayerSourceJson i:nil=&quot;true&quot;/&gt;&lt;a:ProxyUrl/&gt;&lt;a:QueryCascadingID/&gt;&lt;a:QueryDisplayOutputField/&gt;&lt;a:QueryServiceUrl/&gt;&lt;a:QueryValueOutputField/&gt;&lt;a:QueryWhereClause/&gt;&lt;a:SelectText/&gt;&lt;a:SelectedValue i:nil=&quot;true&quot;/&gt;&lt;a:Token/&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:ComboBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;cbCity&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;ComboBox2&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:DataItems/&gt;&lt;a:FilterByInputGeometry&gt;false&lt;/a:FilterByInputGeometry&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;ComboBox2&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;City: &lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:LayerSourceJson i:nil=&quot;true&quot;/&gt;&lt;a:ProxyUrl/&gt;&lt;a:QueryCascadingID/&gt;&lt;a:QueryDisplayOutputField/&gt;&lt;a:QueryServiceUrl/&gt;&lt;a:QueryValueOutputField/&gt;&lt;a:QueryWhereClause/&gt;&lt;a:SelectText/&gt;&lt;a:SelectedValue i:nil=&quot;true&quot;/&gt;&lt;a:Token/&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:ComboBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;cbState&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;ComboBox3&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:DataItems/&gt;&lt;a:FilterByInputGeometry&gt;false&lt;/a:FilterByInputGeometry&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;ComboBox3&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;State: &lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:LayerSourceJson i:nil=&quot;true&quot;/&gt;&lt;a:ProxyUrl/&gt;&lt;a:QueryCascadingID/&gt;&lt;a:QueryDisplayOutputField/&gt;&lt;a:QueryServiceUrl/&gt;&lt;a:QueryValueOutputField/&gt;&lt;a:QueryWhereClause/&gt;&lt;a:SelectText/&gt;&lt;a:SelectedValue i:nil=&quot;true&quot;/&gt;&lt;a:Token/&gt;&lt;/a:FormItem&gt;&lt;a:FormItem i:type=&quot;a:ComboBoxFormItem&quot;&gt;&lt;a:ArgumentName&gt;cbZip&lt;/a:ArgumentName&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID&gt;ComboBox4&lt;/a:ItemID&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:DataItems/&gt;&lt;a:FilterByInputGeometry&gt;false&lt;/a:FilterByInputGeometry&gt;&lt;a:Label&gt;&lt;a:ArgumentName/&gt;&lt;a:IsVisible&gt;true&lt;/a:IsVisible&gt;&lt;a:ItemID/&gt;&lt;a:ToolTip/&gt;&lt;a:ValidationItems xmlns:b=&quot;http://schemas.datacontract.org/2004/07/Geocortex.Forms.Client.Items.Validation&quot;/&gt;&lt;a:LabelForItemID&gt;ComboBox4&lt;/a:LabelForItemID&gt;&lt;a:Text&gt;Zip: &lt;/a:Text&gt;&lt;/a:Label&gt;&lt;a:LayerSourceJson i:nil=&quot;true&quot;/&gt;&lt;a:ProxyUrl/&gt;&lt;a:QueryCascadingID/&gt;&lt;a:QueryDisplayOutputField/&gt;&lt;a:QueryServiceUrl/&gt;&lt;a:QueryValueOutputField/&gt;&lt;a:QueryWhereClause/&gt;&lt;a:SelectText/&gt;&lt;a:SelectedValue i:nil=&quot;true&quot;/&gt;&lt;a:Token/&gt;&lt;/a:FormItem&gt;&lt;/a:FormItems&gt;&lt;a:MaxWidth&gt;INF&lt;/a:MaxWidth&gt;&lt;a:Orientation&gt;Vertical&lt;/a:Orientation&gt;&lt;a:VisibleControlID i:nil=&quot;true&quot;/&gt;&lt;a:VisibleControlValue i:nil=&quot;true&quot;/&gt;&lt;/ContainerFormItem&gt;&lt;KnownTypes xmlns:a=&quot;http://schemas.microsoft.com/2003/10/Serialization/Arrays&quot;&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.ContainerFormItem&lt;/a:string&gt;&lt;a:string&gt;Geocortex.Forms.Client.Items.ComboBoxFormItem&lt;/a:string&gt;&lt;/KnownTypes&gt;&lt;MaxHeight&gt;800&lt;/MaxHeight&gt;&lt;MaxWidth&gt;1000&lt;/MaxWidth&gt;&lt;Title&gt;Select Address Field&lt;/Title&gt;&lt;Version&gt;1.1&lt;/Version&gt;&lt;/FormDefinition&gt;" sap2010:WorkflowViewState.IdRef="DisplayForm_2" WorkflowContainerName="[wfContainer]">
+          <gwa1:DisplayForm.Body>
+            <ActivityAction x:TypeArguments="gcx:FormDefinition">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="gcx:FormDefinition" Name="form" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="RuntimeModifications" sap2010:WorkflowViewState.IdRef="Sequence_5" />
+            </ActivityAction>
+          </gwa1:DisplayForm.Body>
+          <gwa1:DisplayForm.Buttons>
+            <gcx:FormButton CausesValidation="False" IsDefault="False" Label="Cancel" Value="Cancel" />
+            <gcx:FormButton CausesValidation="False" IsDefault="True" Label="Continue" Value="Next" />
+          </gwa1:DisplayForm.Buttons>
+          <gwa1:DisplayForm.FormInArguments>
+            <gwa:ArgumentWrapper x:TypeArguments="InArgument(scg:IEnumerable(gcx:DataItem))" Argument="[ilistDiFields]" IsRequired="False" Name="ComboBox1" />
+            <gwa:ArgumentWrapper x:TypeArguments="InArgument(scg:IEnumerable(gcx:DataItem))" Argument="[ilistDiFields]" IsRequired="False" Name="ComboBox2" />
+            <gwa:ArgumentWrapper x:TypeArguments="InArgument(scg:IEnumerable(gcx:DataItem))" Argument="[ilistDiFields]" IsRequired="False" Name="ComboBox3" />
+            <gwa:ArgumentWrapper x:TypeArguments="InArgument(scg:IEnumerable(gcx:DataItem))" Argument="[ilistDiFields]" IsRequired="False" Name="ComboBox4" />
+          </gwa1:DisplayForm.FormInArguments>
+          <gwa1:DisplayForm.FormOutArguments>
+            <gwa:ArgumentWrapper x:TypeArguments="OutArgument" IsRequired="False" Name="cbAddress">
+              <gwa:ArgumentWrapper.Argument>
+                <OutArgument x:TypeArguments="x:Object">[oAddress]</OutArgument>
+              </gwa:ArgumentWrapper.Argument>
+            </gwa:ArgumentWrapper>
+            <gwa:ArgumentWrapper x:TypeArguments="OutArgument" IsRequired="False" Name="cbCity">
+              <gwa:ArgumentWrapper.Argument>
+                <OutArgument x:TypeArguments="x:Object">[oCity]</OutArgument>
+              </gwa:ArgumentWrapper.Argument>
+            </gwa:ArgumentWrapper>
+            <gwa:ArgumentWrapper x:TypeArguments="OutArgument" IsRequired="False" Name="cbState">
+              <gwa:ArgumentWrapper.Argument>
+                <OutArgument x:TypeArguments="x:Object">[oState]</OutArgument>
+              </gwa:ArgumentWrapper.Argument>
+            </gwa:ArgumentWrapper>
+            <gwa:ArgumentWrapper x:TypeArguments="OutArgument" IsRequired="False" Name="cbZip">
+              <gwa:ArgumentWrapper.Argument>
+                <OutArgument x:TypeArguments="x:Object">[oZip]</OutArgument>
+              </gwa:ArgumentWrapper.Argument>
+            </gwa:ArgumentWrapper>
+          </gwa1:DisplayForm.FormOutArguments>
+        </gwa1:DisplayForm>
+        <If Condition="[usrButtonResult = &quot;Next&quot;]" DisplayName="If user exits, then exit" sap2010:WorkflowViewState.IdRef="If_2">
+          <If.Else>
+            <gwa1:ExitWorkflow sap2010:WorkflowViewState.IdRef="ExitWorkflow_1" />
+          </If.Else>
+        </If>
+      </Sequence>
+      <Sequence DisplayName="Make table" sap2010:WorkflowViewState.IdRef="Sequence_14">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="strRecordCount" />
+          <Variable x:TypeArguments="s2:Byte[]" Name="outByte" />
+          <Variable x:TypeArguments="x:Int32" Name="index" />
+        </Sequence.Variables>
+        <Assign sap2010:Annotation.AnnotationText="For cSharp activity, which does not like accessing input properties e.g. dataTables in a dataSet" DisplayName="Instantiate dataTable" sap2010:WorkflowViewState.IdRef="Assign_16">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataTable">[dtInput]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataTable">[dsSpreadsheet.Tables(0)]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign DisplayName="Instantiate dataTable" sap2010:WorkflowViewState.IdRef="Assign_44">
+          <Assign.To>
+            <OutArgument x:TypeArguments="sd:DataSet">[dsSpreadsheet]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="sd:DataSet">[Nothing]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <gwa1:CSharpScript DisplayName="Add X,Y columns" sap2010:WorkflowViewState.IdRef="CSharpScript_1" Script="// Insert X and Y columns to Datatable&#xA;dtInputTable.Columns.AddRange(new DataColumn[]{&#xA;new DataColumn(&quot;X_Coord&quot;),&#xA;new DataColumn(&quot;Y_Coord&quot;)&#xA;});">
+          <gwa1:CSharpScript.Parameters>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dtInputTable">[dtInput]</InOutArgument>
+          </gwa1:CSharpScript.Parameters>
+        </gwa1:CSharpScript>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_41">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[strRecordCount]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[((CINT(dtInput.Rows.Count)/100)*100).ToString]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <While DisplayName="Don't timeout." sap2010:WorkflowViewState.IdRef="While_1" Condition="[i&lt;dtInput.Rows.Count()]">
+          <TryCatch DisplayName="Try to Geocode" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <TryCatch.Try>
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_23">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="scg:IEnumerable(esri:AddressCandidate)" Name="iListOfAddressCandidates" />
+                </Sequence.Variables>
+                <If Condition="[i Mod 100=0 and i &lt;&gt; 0 and i &lt;&gt; 100]" DisplayName="Keep things alive by changing wfContainer" sap2010:WorkflowViewState.IdRef="If_4">
+                  <If.Then>
+                    <gwa1:ConfigureWorkflowContainer sap2010:WorkflowViewState.IdRef="ConfigureWorkflowContainer_7" IsBusy="[True]" Message="[&quot;Please wait, geocoding... ~&quot;+i.toString+&quot;/&quot;+strRecordCount]" ShowContainer="[True]" Title="Geocode Data" WorkflowContainerName="[wfContainer]" />
+                  </If.Then>
+                </If>
+                <Sequence DisplayName="Geocode and save points" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="njl:JArray" Name="jarrResponse" />
+                    <Variable x:TypeArguments="x:Object" Name="obForJarr" />
+                    <Variable x:TypeArguments="nj:JsonReader" Name="jreadResponse" />
+                    <Variable x:TypeArguments="x:String" Name="strCoords" />
+                    <Variable x:TypeArguments="sd:DataRow" Name="row" />
+                  </Sequence.Variables>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_29">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="sd:DataRow">[row]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="sd:DataRow">[dtInput.Rows(i)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_30">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[strUrl]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String" xml:space="preserve">[strGeocoderRoot+
+"&amp;adminDistrict="+IF(oState.toString = "-", "-", Uri.EscapeDatastring(row.Item(oState.toString).toString))+
+"&amp;locality="+IF(oCity.toString = "-", "-", Uri.EscapeDatastring(row.Item(oCity.toString).toString.Replace("#","no ")))+
+"&amp;postalCode="+IF(oZip.toString = "-", "-", Uri.EscapeDatastring(row.Item(oZip.toString).toString.Replace("#","no ")))+
+"&amp;addressLine="+IF(oAddress.toString = "-", "-", Uri.EscapeDatastring(row.Item(oAddress.toString).toString.Replace("#","no ")))+
+strGeocoderKey]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <gwa1:WebRequest Headers="{x:Null}" ResponseHeaders="{x:Null}" sap2010:WorkflowViewState.IdRef="WebRequest_2" Method="GET" Result="[baGeocodedPoint]" Uri="[strUrl]" />
+                  <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                    <TryCatch.Try>
+                      <Sequence DisplayName="Turn response into coord string" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                        <Assign DisplayName="Encode response to string" sap2010:WorkflowViewState.IdRef="Assign_31">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[strResponseJson]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.Encoding.UTF8.GetString(baGeocodedPoint)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Turn reader into array" sap2010:WorkflowViewState.IdRef="Assign_32">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="njl:JArray">[jarrResponse]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="njl:JArray">[new JArray(JsonConvert.DeserializeObject(strResponseJson))]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Get Coordinates" sap2010:WorkflowViewState.IdRef="Assign_33">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[strCoords]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[jarrResponse(0)("resourceSets")(0)("resources")(0)("geocodePoints")(0)("coordinates").toString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s2:ArgumentOutOfRangeException" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                        <ActivityAction x:TypeArguments="s2:ArgumentOutOfRangeException">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s2:ArgumentOutOfRangeException" Name="exception" />
+                          </ActivityAction.Argument>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_29">
+                            <Assign sap2010:WorkflowViewState.IdRef="Assign_51">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[strUrl]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String" xml:space="preserve">[strGeocoderRoot+
+"&amp;adminDistrict="+IF(oState.toString = "-", "-", Uri.EscapeDatastring(row.Item(oState.toString).toString))+
+"&amp;locality="+IF(oCity.toString = "-", "-", Uri.EscapeDatastring(row.Item(oCity.toString).toString.Replace("#","no ")))+
+"&amp;postalCode="+IF(oZip.toString = "-", "-", Uri.EscapeDatastring(row.Item(oZip.toString).toString.Replace("#","no ")))+
+strGeocoderKey]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <gwa1:WebRequest Headers="{x:Null}" ResponseHeaders="{x:Null}" sap2010:WorkflowViewState.IdRef="WebRequest_3" Method="GET" Result="[baGeocodedPoint]" Uri="[strUrl]" />
+                            <Sequence DisplayName="Turn response into coord string" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                              <Assign DisplayName="Encode response to string" sap2010:WorkflowViewState.IdRef="Assign_52">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[strResponseJson]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[System.Text.Encoding.UTF8.GetString(baGeocodedPoint)]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <Assign DisplayName="Turn reader into array" sap2010:WorkflowViewState.IdRef="Assign_53">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="njl:JArray">[jarrResponse]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="njl:JArray">[new JArray(JsonConvert.DeserializeObject(strResponseJson))]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <Assign DisplayName="Get Coordinates" sap2010:WorkflowViewState.IdRef="Assign_54">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[strCoords]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[jarrResponse(0)("resourceSets")(0)("resources")(0)("geocodePoints")(0)("coordinates").toString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </Sequence>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
+                  <Sequence DisplayName="Clean string, put coords in table" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_34">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strCoords]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[strCoords.Replace(System.Environment.NewLine, String.Empty)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_35">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strCoords]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[strCoords.Replace(" ", String.Empty)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_36">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strCoords]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[strCoords.Split("]".ToCharArray)(0)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_37">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strCoords]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[strCoords.Split("[".ToCharArray)(1)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_38">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[row.Item("X_Coord")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">[strCoords.Split(",".ToCharArray)(1)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_39">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[row.Item("Y_Coord")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">[strCoords.Split(",".ToCharArray)(0)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_40">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[i]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[i+1]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </Sequence>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s2:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                <ActivityAction x:TypeArguments="s2:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s2:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_32">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="s2:DateTime" Name="dNow" />
+                      <Variable x:TypeArguments="scg:ICollection(snm:Attachment)" Name="iCollection1" />
+                      <Variable x:TypeArguments="scg:ICollection(snm:Attachment)" Name="attachmentCollection" />
+                      <Variable x:TypeArguments="si:MemoryStream" Name="stream" />
+                      <Variable x:TypeArguments="snm:Attachment" Name="reportAttachment" />
+                    </Sequence.Variables>
+                    <gwa1:Alert sap2010:WorkflowViewState.IdRef="Alert_2" Text="[&quot;There has been an error in the geocoding tool on line &quot;+ i.ToString +&quot;. Please contact a system administrator with the following information.&quot;+System.Environment.NewLine+strUrl+System.Environment.NewLine+exception.toString]" Title="Workflow Error" />
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_65">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Int32">[i]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">[i+1]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_64">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="sd:DataSet">[dsSpreadsheet]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="sd:DataSet">[New DataSet]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <gwa1:AddToDataSet DataSet="[dsSpreadsheet]" DataTable="[dtInput]" sap2010:WorkflowViewState.IdRef="AddToDataSet_2" />
+                    <gwa1:DataSetToXlsx DataSet="[dsSpreadsheet]" sap2010:WorkflowViewState.IdRef="DataSetToXlsx_1" Result="[outByte]" />
+                    <Assign DisplayName="Memory Stream" sap2010:WorkflowViewState.IdRef="Assign_58">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="si:MemoryStream">[stream]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="si:MemoryStream">[new System.IO.MemoryStream(outByte)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Attachment Collection" sap2010:WorkflowViewState.IdRef="Assign_59">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="scg:ICollection(snm:Attachment)">[attachmentCollection]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="scg:ICollection(snm:Attachment)">[New System.Collections.ObjectModel.Collection(Of System.Net.Mail.Attachment)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Create Attachment from Stream" sap2010:WorkflowViewState.IdRef="Assign_60">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="snm:Attachment">[reportAttachment]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="snm:Attachment">[new System.Net.Mail.Attachment(stream, new System.Net.MIME.ContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <AddToCollection x:TypeArguments="snm:Attachment" Collection="[attachmentCollection]" DisplayName="AddToCollection&lt;Attachment&gt;" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[reportAttachment]" />
+                    <Assign DisplayName="Assign DateTime" sap2010:WorkflowViewState.IdRef="Assign_57">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="s2:DateTime">[dNow]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="s2:DateTime">[new DateTime().now()]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <gwa1:SendMail Attachments="[attachmentCollection]" Body="[&quot;&lt;html&gt;&lt;body&gt;&lt;table border=0&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Last Geocoded Url:&lt;/td&gt;&lt;td&gt;&quot; + strUrl + &quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Exception:&lt;/td&gt;&lt;td&gt;&quot; + exception.toString +  &quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;&quot;]" DisplayName="SendMailToTechSupport" EnableSsl="True" From="mailer@digitaldataservices.com" Host="smtp.office365.com" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="True" Password="ErUoUrkhB1" Port="587" Subject="[&quot;Hansen Geocoder Failure - Ref #: &quot; + dNow.ToString(&quot;yyMMdd-HHmmss&quot;)]" To="techsupport@digitaldataservices.com" UserName="mailer@digitaldataservices.com" />
+                  </Sequence>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+          </TryCatch>
+        </While>
+        <Assign DisplayName="Assign Table Name" sap2010:WorkflowViewState.IdRef="Assign_24">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[dtInput.tablename]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">GeocodeResults</InArgument>
+          </Assign.Value>
+        </Assign>
+        <gwa1:ConfigureWorkflowContainer sap2010:WorkflowViewState.IdRef="ConfigureWorkflowContainer_4" IsBusy="[True]" Message="Please wait, creating geometries..." ShowContainer="[True]" Title="Geocode Data" WorkflowContainerName="[wfContainer]" />
+        <Sequence DisplayName="Convert DataTable row data to Graphic objects and create a  FeatureSet from the Graphic's list" sap2010:WorkflowViewState.IdRef="Sequence_38">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="esri:MapPoint" Name="tempMapPoint" />
+            <Variable x:TypeArguments="scg:IList(esri:Graphic)" Name="tempGraphicsList" />
+            <Variable x:TypeArguments="esri:Graphic" Name="tempGraphic" />
+            <Variable x:TypeArguments="scg:IList(x:String)" Name="strColumnNameList" />
+            <Variable x:TypeArguments="scg:IEnumerable(sd:DataColumn)" Name="temp" />
+            <Variable x:TypeArguments="scg:IDictionary(x:String, x:Object)" Name="tempAttributeDictionary" />
+          </Sequence.Variables>
+          <Sequence DisplayName="Extract DataTable Column Names" sap2010:WorkflowViewState.IdRef="Sequence_39">
+            <gwa1:CreateList x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CreateList`1_3" Result="[strColumnNameList]" />
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_78">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[index]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">0</InArgument>
+              </Assign.Value>
+            </Assign>
+            <While sap2010:WorkflowViewState.IdRef="While_3" Condition="[index &lt; dtInput.Columns.Count]">
+              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_40">
+                <gwa1:InsertIntoList x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="InsertIntoList`1_4" Index="[strColumnNameList.Count]" Item="[dtInput.Columns(index).ColumnName]" List="[strColumnNameList]" />
+                <Assign DisplayName="Increment the index count" sap2010:WorkflowViewState.IdRef="Assign_79">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[index]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[index + 1]</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </Sequence>
+            </While>
+          </Sequence>
+          <gwa1:CreateList x:TypeArguments="esri:Graphic" DisplayName="Create a temporary Graphics list" sap2010:WorkflowViewState.IdRef="CreateList`1_2" Result="[tempGraphicsList]" />
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_70">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[index]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">0</InArgument>
+            </Assign.Value>
+          </Assign>
+          <While DisplayName="While (loop thru all the rows in the Table)" sap2010:WorkflowViewState.IdRef="While_2">
+            <While.Variables>
+              <Variable x:TypeArguments="sd:DataRow" Name="dtRow" />
+            </While.Variables>
+            <While.Condition>[index &lt; dtInput.Rows.Count]</While.Condition>
+            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_37">
+              <Assign DisplayName="Get the current row" sap2010:WorkflowViewState.IdRef="Assign_71">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="sd:DataRow">[dtRow]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="sd:DataRow">[dtInput.Rows(index)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Create a MapPoint from the row's X/Y coordinates" sap2010:WorkflowViewState.IdRef="Assign_72">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="esri:MapPoint">[tempMapPoint]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="esri:MapPoint">[New ESRI.ArcGIS.Client.Geometry.MapPoint(CDbl(dtRow("X_coord").ToString()), CDbl(dtRow("Y_coord").ToString()), New ESRI.ArcGIS.Client.Geometry.SpatialReference(4326))]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Create a new Graphic object" sap2010:WorkflowViewState.IdRef="Assign_74">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="esri:Graphic">[tempGraphic]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="esri:Graphic">[new ESRI.ArcGIS.Client.Graphic()]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Sequence DisplayName="Create/attach the row attributes" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                <ForEach x:TypeArguments="x:String" DisplayName="ForEach&lt;String&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_9" Values="[strColumnNameList]">
+                  <ActivityAction x:TypeArguments="x:String">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+                    </ActivityAction.Argument>
+                    <gwa1:AddToDictionary x:TypeArguments="x:String, x:Object" Dictionary="[tempGraphic.Attributes]" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_1" Key="[item]" Value="[dtRow(item)]" />
+                  </ActivityAction>
+                </ForEach>
+              </Sequence>
+              <Assign sap2010:Annotation.AnnotationText="The Geometry must be added after the Attributes or display errors result" DisplayName="Attach the geometry to the Graphic" sap2010:WorkflowViewState.IdRef="Assign_75">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="esri:Geometry">[tempGraphic.Geometry]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="esri:Geometry">[tempMapPoint]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <gwa1:InsertIntoList x:TypeArguments="esri:Graphic" sap2010:WorkflowViewState.IdRef="InsertIntoList`1_3" Index="[tempGraphicsList.Count]" Item="[tempGraphic]" List="[tempGraphicsList]" />
+              <Assign DisplayName="Increment the index count" sap2010:WorkflowViewState.IdRef="Assign_73">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[index]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[index + 1]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </While>
+          <Assign sap2010:WorkflowViewState.IdRef="Assign_76">
+            <Assign.To>
+              <OutArgument x:TypeArguments="esri:FeatureSet">[fsGeocodeResults]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="esri:FeatureSet">[new ESRI.ArcGis.Client.Tasks.FeatureSet(tempGraphicsList)]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </Sequence>
+    </Sequence>
+    <gwa1:SelectFeatures ClearCollectionFirst="True" CollectionName="Geocoded XLSX" FeatureSet="[fsGeocodeResults]" sap2010:WorkflowViewState.IdRef="SelectFeatures_1" ShowPushpins="True" />
+    <gwa1:GetFeatureSetExtent FeatureSet="[fsGeocodeResults]" sap2010:WorkflowViewState.IdRef="GetFeatureSetExtent_1" Result="[envGeocodeResults]" />
+    <gwa1:SetMapExtent Extent="[envGeocodeResults.Expand(1.2)]" sap2010:WorkflowViewState.IdRef="SetMapExtent_1" />
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="ConfigureWorkflowContainer_1" sap:VirtualizedContainerService.HintSize="1062,186">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_67" sap:VirtualizedContainerService.HintSize="1062,60" />
+      <sap2010:ViewStateData Id="Alert_4" sap:VirtualizedContainerService.HintSize="212,86" />
+      <sap2010:ViewStateData Id="ExitWorkflow_4" sap:VirtualizedContainerService.HintSize="212,22" />
+      <sap2010:ViewStateData Id="Sequence_42" sap:VirtualizedContainerService.HintSize="234,272">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="1062,420" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DisplayForm_1" sap:VirtualizedContainerService.HintSize="1040,690" />
+      <sap2010:ViewStateData Id="Assign_66" sap:VirtualizedContainerService.HintSize="541,60" />
+      <sap2010:ViewStateData Id="XlsxToDataSet_3" sap:VirtualizedContainerService.HintSize="260,86" />
+      <sap2010:ViewStateData Id="Assign_45" sap:VirtualizedContainerService.HintSize="260,60" />
+      <sap2010:ViewStateData Id="Assign_43" sap:VirtualizedContainerService.HintSize="260,60" />
+      <sap2010:ViewStateData Id="Sequence_33" sap:VirtualizedContainerService.HintSize="282,410">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Alert_3" sap:VirtualizedContainerService.HintSize="212,86" />
+      <sap2010:ViewStateData Id="ExitWorkflow_3" sap:VirtualizedContainerService.HintSize="212,22" />
+      <sap2010:ViewStateData Id="Sequence_25" sap:VirtualizedContainerService.HintSize="234,272">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="541,558" />
+      <sap2010:ViewStateData Id="Sequence_34" sap:VirtualizedContainerService.HintSize="563,782">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExitWorkflow_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="1040,930">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="1062,1784">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CreateList`1_1" sap:VirtualizedContainerService.HintSize="516,61" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="InsertIntoList`1_2" sap:VirtualizedContainerService.HintSize="217,111" />
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="464,259" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="486,683">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_4" sap:VirtualizedContainerService.HintSize="516,831">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="InsertIntoList`1_1" sap:VirtualizedContainerService.HintSize="242,111" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="516,535">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="DisplayForm_2" sap:VirtualizedContainerService.HintSize="516,804">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExitWorkflow_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="516,208">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_13" sap:VirtualizedContainerService.HintSize="552,2723">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_16" sap:VirtualizedContainerService.HintSize="530,60">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_44" sap:VirtualizedContainerService.HintSize="530,60" />
+      <sap2010:ViewStateData Id="CSharpScript_1" sap:VirtualizedContainerService.HintSize="530,86" />
+      <sap2010:ViewStateData Id="Assign_41" sap:VirtualizedContainerService.HintSize="530,60" />
+      <sap2010:ViewStateData Id="ConfigureWorkflowContainer_7" sap:VirtualizedContainerService.HintSize="330,186">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="464,334">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_29" sap:VirtualizedContainerService.HintSize="418,60" />
+      <sap2010:ViewStateData Id="Assign_30" sap:VirtualizedContainerService.HintSize="418,64" />
+      <sap2010:ViewStateData Id="WebRequest_2" sap:VirtualizedContainerService.HintSize="418,106" />
+      <sap2010:ViewStateData Id="Assign_31" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_32" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_33" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_20" sap:VirtualizedContainerService.HintSize="264,384">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_51" sap:VirtualizedContainerService.HintSize="339,64" />
+      <sap2010:ViewStateData Id="WebRequest_3" sap:VirtualizedContainerService.HintSize="339,106" />
+      <sap2010:ViewStateData Id="Assign_52" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_53" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_54" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_28" sap:VirtualizedContainerService.HintSize="339,384">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="361,751">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="404,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="418,611">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_34" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_35" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_36" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_37" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_38" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_39" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="418,684">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_40" sap:VirtualizedContainerService.HintSize="418,60" />
+      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="464,1909">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_23" sap:VirtualizedContainerService.HintSize="486,2407">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Alert_2" sap:VirtualizedContainerService.HintSize="463,86" />
+      <sap2010:ViewStateData Id="Assign_65" sap:VirtualizedContainerService.HintSize="463,60" />
+      <sap2010:ViewStateData Id="Assign_64" sap:VirtualizedContainerService.HintSize="463,60" />
+      <sap2010:ViewStateData Id="AddToDataSet_2" sap:VirtualizedContainerService.HintSize="463,86" />
+      <sap2010:ViewStateData Id="DataSetToXlsx_1" sap:VirtualizedContainerService.HintSize="463,86" />
+      <sap2010:ViewStateData Id="Assign_58" sap:VirtualizedContainerService.HintSize="463,60" />
+      <sap2010:ViewStateData Id="Assign_59" sap:VirtualizedContainerService.HintSize="463,60" />
+      <sap2010:ViewStateData Id="Assign_60" sap:VirtualizedContainerService.HintSize="463,60" />
+      <sap2010:ViewStateData Id="AddToCollection`1_1" sap:VirtualizedContainerService.HintSize="463,22" />
+      <sap2010:ViewStateData Id="Assign_57" sap:VirtualizedContainerService.HintSize="463,60" />
+      <sap2010:ViewStateData Id="SendMail_1" sap:VirtualizedContainerService.HintSize="463,186" />
+      <sap2010:ViewStateData Id="Sequence_32" sap:VirtualizedContainerService.HintSize="485,1327">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="490,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="504,2634">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="530,2792">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_24" sap:VirtualizedContainerService.HintSize="530,60" />
+      <sap2010:ViewStateData Id="ConfigureWorkflowContainer_4" sap:VirtualizedContainerService.HintSize="530,186">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CreateList`1_3" sap:VirtualizedContainerService.HintSize="464,61" />
+      <sap2010:ViewStateData Id="Assign_78" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="InsertIntoList`1_4" sap:VirtualizedContainerService.HintSize="242,111" />
+      <sap2010:ViewStateData Id="Assign_79" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_40" sap:VirtualizedContainerService.HintSize="264,335">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="While_3" sap:VirtualizedContainerService.HintSize="464,493" />
+      <sap2010:ViewStateData Id="Sequence_39" sap:VirtualizedContainerService.HintSize="464,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CreateList`1_2" sap:VirtualizedContainerService.HintSize="464,61" />
+      <sap2010:ViewStateData Id="Assign_70" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Assign_71" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_72" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Assign_74" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="AddToDictionary`2_1" sap:VirtualizedContainerService.HintSize="243,111" />
+      <sap2010:ViewStateData Id="ForEach`1_9" sap:VirtualizedContainerService.HintSize="287,259" />
+      <sap2010:ViewStateData Id="Sequence_41" sap:VirtualizedContainerService.HintSize="242,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_75" sap:VirtualizedContainerService.HintSize="242,98">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InsertIntoList`1_3" sap:VirtualizedContainerService.HintSize="242,111" />
+      <sap2010:ViewStateData Id="Assign_73" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="Sequence_37" sap:VirtualizedContainerService.HintSize="264,864">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="While_2" sap:VirtualizedContainerService.HintSize="464,1022">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_76" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="Sequence_38" sap:VirtualizedContainerService.HintSize="530,1538">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="552,5246">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="1062,8133">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SelectFeatures_1" sap:VirtualizedContainerService.HintSize="1062,161" />
+      <sap2010:ViewStateData Id="GetFeatureSetExtent_1" sap:VirtualizedContainerService.HintSize="1062,86" />
+      <sap2010:ViewStateData Id="SetMapExtent_1" sap:VirtualizedContainerService.HintSize="1062,61" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1084,11295">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="1124,11375" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
