@@ -1,0 +1,180 @@
+﻿<Activity mc:Ignorable="sads sap sap2010" x:Class="ActivityBuilder" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:eac="clr-namespace:ESRI.ArcGIS.Client;assembly=ESRI.ArcGIS.Client"
+ xmlns:eacg="clr-namespace:ESRI.ArcGIS.Client.Geometry;assembly=ESRI.ArcGIS.Client"
+ xmlns:eact="clr-namespace:ESRI.ArcGIS.Client.Tasks;assembly=ESRI.ArcGIS.Client"
+ xmlns:esri="http://schemas.esri.com/arcgis/client/2009"
+ xmlns:gce="clr-namespace:Geocortex.Core.Extensions;assembly=Geocortex.Core"
+ xmlns:gfc="clr-namespace:Geocortex.Forms.Client;assembly=Geocortex.EssentialsWpfApi"
+ xmlns:gfci="clr-namespace:Geocortex.Forms.Client.Items;assembly=Geocortex.EssentialsWpfApi"
+ xmlns:gr="clr-namespace:Geocortex.Reporting;assembly=Geocortex.Reporting"
+ xmlns:gwa="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow"
+ xmlns:gwa1="clr-namespace:Geocortex.Workflow.Activities;assembly=Geocortex.Workflow.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=System.Core"
+ xmlns:s1="clr-namespace:System;assembly=System"
+ xmlns:s2="clr-namespace:System;assembly=mscorlib"
+ xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sl="clr-namespace:System.Linq;assembly=System.Core"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>ESRI.ArcGIS.Client</x:String>
+      <x:String>ESRI.ArcGIS.Client.Geometry</x:String>
+      <x:String>ESRI.ArcGIS.Client.Tasks</x:String>
+      <x:String>Geocortex.Core.Extensions</x:String>
+      <x:String>Geocortex.Workflow.Activities</x:String>
+      <x:String>Geocortex.Forms.Client</x:String>
+      <x:String>Geocortex.Forms.Client.Items</x:String>
+      <x:String>Geocortex.Reporting</x:String>
+      <x:String>System</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>ESRI.ArcGIS.Client</AssemblyReference>
+      <AssemblyReference>Geocortex.Core</AssemblyReference>
+      <AssemblyReference>Geocortex.Workflow</AssemblyReference>
+      <AssemblyReference>Geocortex.EssentialsWpfApi</AssemblyReference>
+      <AssemblyReference>Geocortex.Reporting</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>Geocortex.Workflow.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="https://yourserver/arcgis/rest/services/Utilities/Geometry/GeometryServer" Name="urlGeometryService" />
+      <Variable x:TypeArguments="esri:Envelope" Name="bufferExtent" />
+      <Variable x:TypeArguments="x:Double" Default="5" Name="bufferDistance" />
+      <Variable x:TypeArguments="esri:Geometry" Name="usrGeom" />
+      <Variable x:TypeArguments="esri:Geometry" Name="bufferResult" />
+      <Variable x:TypeArguments="x:String" Default="8" Name="mapServiceId" />
+      <Variable x:TypeArguments="x:String" Default="9" Name="layerId" />
+      <Variable x:TypeArguments="x:String" Default="YourSearchLayer" Name="urlSearchFeatures" />
+      <Variable x:TypeArguments="esri:FeatureSet" Name="fsSearchFeatures" />
+      <Variable x:TypeArguments="x:String" Default="https://yourserver/arcgis/tokens/" Name="urlTokenService" />
+    </Sequence.Variables>
+    <Sequence DisplayName="GetBufferFromUser" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <gwa1:Alert sap2010:WorkflowViewState.IdRef="Alert_1" Text="Click on the map to display the PLSS sections within 5 miles of your location." Title="Click on map to search" />
+      <gwa1:CaptureGeometry CaptureType="[Geocortex.Workflow.Activities.GeometryCaptureType.MapPoint]" sap2010:WorkflowViewState.IdRef="CaptureGeometry_1" Result="[usrGeom]" />
+      <gwa1:BufferTask Distance="[bufferDistance]" Geodesic="True" Geometry="[usrGeom]" GeometryServiceUrl="[urlGeometryService]" sap2010:WorkflowViewState.IdRef="BufferTask_1" UnionResults="True" UnionedResult="[bufferResult]" Unit="[ESRI.ArcGIS.Client.Tasks.LinearUnit.StatuteMile]" />
+      <gwa1:RunExternalCommand CommandName="AddMarkupGeometry" CommandParameter="[bufferResult]" sap2010:WorkflowViewState.IdRef="RunExternalCommand_1" />
+      <gwa1:GetFeatureSetExtent FeatureSet="[new FeatureSet(bufferResult)]" sap2010:WorkflowViewState.IdRef="GetFeatureSetExtent_1" Result="[bufferExtent]" />
+      <gwa1:SetMapExtent Extent="[bufferExtent.Expand(1.2)]" sap2010:WorkflowViewState.IdRef="SetMapExtent_1" />
+    </Sequence>
+    <Sequence DisplayName="QueryFeaturesDisplaySorted" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="esri:Field" Default="[New ESRI.ArcGIS.Client.Field(&quot;DISTANCE&quot;, ESRI.ArcGIS.Client.Field.FieldType.Double, &quot;Distance&quot;, Nothing, False, True, 0)]" Name="fldDistance" />
+        <Variable x:TypeArguments="x:String" Name="agsToken" />
+      </Sequence.Variables>
+      <gwa1:GenerateToken sap2010:WorkflowViewState.IdRef="GenerateToken_1" Password="YourPassword" Token="[agsToken]" TokenServiceUrl="[urlTokenService]" UseLegacyRequestMode="False" UserName="YourUserName" />
+      <gwa1:QueryTask Geometry="[bufferResult]" sap2010:WorkflowViewState.IdRef="QueryTask_1" OutFields="*" QueryServiceUrl="[urlSearchFeatures]" Results="[fsSearchFeatures]" ReturnGeometry="True" Token="[agsToken]" />
+      <InvokeMethod DisplayName="AddDistanceField" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add">
+        <InvokeMethod.TargetObject>
+          <InArgument x:TypeArguments="scg:List(esri:Field)">[fsSearchFeatures.Fields]</InArgument>
+        </InvokeMethod.TargetObject>
+        <InArgument x:TypeArguments="esri:Field">[fldDistance]</InArgument>
+      </InvokeMethod>
+      <ForEach x:TypeArguments="esri:Graphic" DisplayName="ForEach&lt;Graphic&gt;" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[fsSearchFeatures]">
+        <ActivityAction x:TypeArguments="esri:Graphic">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="esri:Graphic" Name="item" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="CalcAssignDistance" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Double" Name="tempDistance" />
+            </Sequence.Variables>
+            <gwa1:DistanceTask DistanceUnit="[ESRI.ArcGIS.Client.Tasks.LinearUnit.Foot]" Geometry1="[usrGeom]" Geometry2="[item.Geometry]" GeometryServiceUrl="[urlGeometryService]" sap2010:WorkflowViewState.IdRef="DistanceTask_1" Result="[tempDistance]" />
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Object">[item.Attributes("DISTANCE")]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Object">[tempDistance]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ForEach>
+      <gwa1:SortFeatureSet FeatureSet="[fsSearchFeatures]" sap2010:WorkflowViewState.IdRef="SortFeatureSet_1" SortAttribute="DISTANCE" SortDirection="[System.ComponentModel.ListSortDirection.Ascending]" />
+      <gwa1:SelectFeatures CollectionName="Features Near Me" FeatureSet="[fsSearchFeatures]" sap2010:WorkflowViewState.IdRef="SelectFeatures_1" LayerId="[layerId]" MapServiceId="[mapServiceId]" />
+    </Sequence>
+    <sads:DebugSymbol.Symbol>dzRDOlxVc2Vyc1x0bW5lZXIuU0VSVkVSMDVcRGVza3RvcFxGZWF0dXJlc05lYXJNZS54YW1sREIDfQ4CAQFENER/AgEHRjRGNwIBBkk0STcCAQVKNEo3AgEESzRLRQIBA000TVcCAQJPBVYQAgE6VwV7EAIBCFAHULQBAgFVUQdRsQECAVFSB1KgAgIBRVMHU5sBAgFCVAdUnwECAT5VB1VxAgE7WThZyAECAQlcB1zTAQIBM10HXdsBAgEpXgdjFgIBJWQHeBECARV5B3nOAQIBEXoHesUBAgEKUEJQkgECAVdQmQFQsQECAVZRowFRrgECAVNRKVFnAgFSUmxSggECAU9SIVIzAgFNUuoBUp0CAgFMUk1SWAIBSlK/AVLFAQIBSVI9UkMCAUhS1AFS5AECAUZTUVNhAgFEUyxTPwIBQ1SMAVScAQIBQFQsVEwCAT9VIVU9AgE8XMIBXNABAgE5XIgBXJsBAgE3XGtcdwIBNVxWXGQCATRdaV1sAgEyXZsBXa8BAgExXSBdMAIBL13MAV3YAQIBLV2/AV3FAQIBLF19XZIBAgEqYD5gVwIBKGIyYj8CASZkiQFknQECASRpC3YWAgEWeX15hwECARR5lgF5ywECARN5J3k7AgESepkBeqQBAgEPeit6PQIBDnpJel0CAQ16sgF6wgECAQttDW2BAgIBG24NdRYCARdtnwFttQECASJtem2LAQIBIW3uAW3+AQIBH21kbW8CAR1tLW1ZAgEcczhzRgIBGXA5cFYCARg=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Alert_1" sap:VirtualizedContainerService.HintSize="337,86" />
+      <sap2010:ViewStateData Id="CaptureGeometry_1" sap:VirtualizedContainerService.HintSize="337,86" />
+      <sap2010:ViewStateData Id="BufferTask_1" sap:VirtualizedContainerService.HintSize="337,261" />
+      <sap2010:ViewStateData Id="RunExternalCommand_1" sap:VirtualizedContainerService.HintSize="337,86" />
+      <sap2010:ViewStateData Id="GetFeatureSetExtent_1" sap:VirtualizedContainerService.HintSize="337,86" />
+      <sap2010:ViewStateData Id="SetMapExtent_1" sap:VirtualizedContainerService.HintSize="337,61" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="359,990">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="GenerateToken_1" sap:VirtualizedContainerService.HintSize="337,211" />
+      <sap2010:ViewStateData Id="QueryTask_1" sap:VirtualizedContainerService.HintSize="337,243" />
+      <sap2010:ViewStateData Id="InvokeMethod_1" sap:VirtualizedContainerService.HintSize="337,128" />
+      <sap2010:ViewStateData Id="DistanceTask_1" sap:VirtualizedContainerService.HintSize="334,161" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="334,60" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="356,385">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="337,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SortFeatureSet_1" sap:VirtualizedContainerService.HintSize="337,111" />
+      <sap2010:ViewStateData Id="SelectFeatures_1" sap:VirtualizedContainerService.HintSize="337,161" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="359,1229">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="381,2383">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ActivityBuilder_1" sap:VirtualizedContainerService.HintSize="421,2463" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
